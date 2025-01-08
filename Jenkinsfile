@@ -5,7 +5,7 @@ node {
 
     stage('Build image') {
         dir('docker-project-front') {
-            dockerImage = docker.build("taehoon981/node-front:5.0", ".")
+            dockerImage = docker.build("taehoon981/node-front:6.0", ".")
         }
     }
 
@@ -20,7 +20,7 @@ node {
             docker ps -q | xargs docker stop  # 모든 컨테이너 중지
             docker ps -aq | xargs docker rm -f  # 모든 컨테이너 강제 삭제
 
-            docker pull taehoon981/node-front:5.0
+            docker pull taehoon981/node-front:6.0
             docker compose up -d 
         '''
     }
