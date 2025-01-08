@@ -1,6 +1,6 @@
 node {
     stage('Clone repository') {
-        git credentialsId: 'github-access', url: 'https://github.com/JONBERMAN/lab-webhook.git'
+        git credentialsId: 'github_access_token', url: 'https://github.com/JONBERMAN/lab-webhook.git'
     }
 
     stage('Build image') {
