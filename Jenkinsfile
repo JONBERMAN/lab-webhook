@@ -5,7 +5,6 @@ node {
 
     stage('Build image') {
         dir('docker-project-front') {
-            sh 'ls -l'
             dockerImage = docker.build("taehoon981/node-front:3.0", ".")
         }
     }

@@ -1,0 +1,50 @@
+services:
+  mysql:
+    image: mysql:5.7-debian
+    container_name: rolling-db
+    environment:
+      MYSQL_ROOT_PASSWORD: pass123
+      MYSQL_DATABASE: paperdb
+      MYSQL_ROOT_HOST: '%' # Allow root connecting from any address.
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    ports:
+      - '13306:3306'
+    networks:
+      - rolling-be-db
+    restart: always
+    command:
+      - --character-set-server=utf8
+      - --collation-server=utf8_general_ci
+
+  springboot:
+    image: springboot-mysql:1.0
+    container_name: rolling-server
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - '8080:8080'
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://rolling-db:3306/paperdb?serverTimezone=Asia/Seoul
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: user
+    networks:
+      - rolling-be-db
+      - rolling-fe-be
+
+  front:
+    image: node-front:1.0
+    container_name: rolling-front
+    restart: always
+    depends_on:
+      - springboot
+    ports:
+      - '3000:3000'
+    networks:
+      - rolling-fe-be
+
+networks:
+  rolling-be-db: {}
+  rolling-fe-be: {}
+
