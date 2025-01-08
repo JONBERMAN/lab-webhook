@@ -5,7 +5,7 @@ node {
 
     stage('Build image') {
         dir('docker-project-front') {
-            dockerImage = docker.build("taehoon981/node-front:3.0", ".")
+            dockerImage = docker.build("taehoon981/node-front:5.0", ".")
         }
     }
 
