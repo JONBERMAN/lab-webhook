@@ -19,7 +19,7 @@ node {
         sh '''
             docker-compose down
             docker pull taehoon981/node-front:5.0
-            docker-compose up -d
+            docker-compose up -d --no-deps --build
         '''
     }
 }
