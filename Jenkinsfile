@@ -17,7 +17,9 @@ node {
     stage('Run Docker Compose') {
         // 필요한 경로로 이동 후 명령 실행
         sh '''
-            docker compose down 
+            docker ps -q | xargs docker stop  # 모든 컨테이너 중지
+            docker ps -aq | xargs docker rm -f  # 모든 컨테이너 강제 삭제
+
             docker pull taehoon981/node-front:5.0
             docker compose up -d 
         '''
