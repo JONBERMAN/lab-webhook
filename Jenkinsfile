@@ -14,5 +14,14 @@ node {
             dockerImage.push()
         }
     }
+    stage('Run Docker Compose') {
+        // 필요한 경로로 이동 후 명령 실행
+        sh '''
+            cd /var/lib/jenkins/workspace/${JOB_NAME}/docker-project-front/RollingPaper
+            docker-compose down
+            docker pull taehoon981/node-front:5.0
+            docker-compose up -d
+        '''
+    }
 }
 
