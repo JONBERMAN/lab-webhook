@@ -34,7 +34,7 @@ services:
       - rolling-fe-be
 
   front:
-    image: node-front:1.0
+    image: taehoon981/node-front:5.0
     container_name: rolling-front
     restart: always
     depends_on:
