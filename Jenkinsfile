@@ -17,7 +17,7 @@ node {
     stage('Run Docker Compose') {
         // 필요한 경로로 이동 후 명령 실행
         sh '''
-            docker-compose down
+            docker-compose down --volumes
             docker pull taehoon981/node-front:5.0
             docker-compose up -d --no-deps --build
         '''
